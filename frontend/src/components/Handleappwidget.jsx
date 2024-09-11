@@ -3,7 +3,7 @@ import { IoClose } from 'react-icons/io5';
 import { FiDelete } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import AddCategoryModal from './Addwidgetmodal'; // Fixed import name
-import { removeCategory, addWidget } from '../features/dashboardSlice';
+import { removeWidget, addWidget } from '../features/dashboardSlice';
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import Editwidgetmodal from './Editwidgetmodal';
@@ -11,6 +11,7 @@ import Editwidgetmodal from './Editwidgetmodal';
 const HandleAppWidget = ({ category, categories, onClose }) => {
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [widgetName, setWidgetName] = useState('');
+  const [widgetId, setWidgetId] = useState('');
   const [showModalWidgetEdit, setShowModalWidgetEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [widgetDescription, setWidgetDescription] = useState('');
@@ -31,6 +32,11 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
     setWidgetName(widgetN)
     setShowModalWidgetEdit(true);
   }
+
+  const handleDeleteWidget = (widget) => {
+    dispatch(removeWidget({ categoryName: selectedCategory, widgetId: widget.id }));
+  };
+  
 
   // Removed unused code
   // const handleRemoveCategory = (idx) => {
@@ -101,9 +107,9 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
                   <input type="checkbox" className='' />
                   <h6 className="text-sm pl-2 font-semibold text-gray-800">{widget.name}</h6>
                 </div>
-                <div onClick={()=>handleEditWidget(widget)} className="flex cursor-pointer">
-                  <MdDelete className='w-8' />
-                  <CiEdit className='w-8'/> 
+                <div  className="flex cursor-pointer">
+                  <MdDelete className='w-8' onClick={()=>handleDeleteWidget(widget)} />
+                  <CiEdit className='w-8' onClick={()=>handleEditWidget(widget)}/> 
                 </div>
               </li>
             ))}
