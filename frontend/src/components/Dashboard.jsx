@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widget';
 import HandleAppWidget from './Handleappwidget'; // Import the widget overlay
 import { removeWidget } from '../features/dashboardSlice';
+import Editwidgetmodal from './Editwidgetmodal';
 
 const Dashboard = () => {
   const categories = useSelector((state) => state.dashboard.categories);
@@ -11,11 +12,20 @@ const Dashboard = () => {
   const [currentCategory, setCurrentCategory] = useState('CSPM Executive Dashboard');
   const [query, setSearchQuery] = useState('');
   const [filteredCategories, setFilteredCategories] = useState(categories);
+  const [showModalWidgetEdit, setShowModalWidgetEdit] = useState(false);
   //  console.log(categories[0].widgets)
+  const [widget, setWidget] = useState('');
+  const [modalCatName, setModalCatName] = useState('');
 
   const handleRemoveWidget = (categoryName, widgetId) => {
     dispatch(removeWidget({ categoryName, widgetId }));
   };
+
+  const handleEditWidget = (catName, widget) => {
+    setWidget(widget);
+    setModalCatName(catName);
+    setShowModalWidgetEdit(true);
+  }
 
   const handleAddWidget = (categoryName) => {
     setCurrentCategory(categoryName);
@@ -69,6 +79,7 @@ const Dashboard = () => {
                   <Widget
                     widget={widget}
                     onRemove={() => handleRemoveWidget(category.name, widget.id)}
+                    onEdit={()=>handleEditWidget(category.name,widget)}
                   />
                 </div>
               ))}
@@ -93,6 +104,14 @@ const Dashboard = () => {
             onClose={handleCloseWidgetPanel}
           />
         </div>
+      )}
+
+      {showModalWidgetEdit && (
+        <Editwidgetmodal
+          category={modalCatName}
+          widget = {widget}
+          onClose={() => setShowModalWidgetEdit(false)}
+        />
       )}
     </div>
   );

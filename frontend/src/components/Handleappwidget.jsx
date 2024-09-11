@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { FiDelete } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
-import AddCategoryModal from './Addwidgetmodal'; // Fixed import name
+import AddCategoryModal from './Addcategorymodal'; // Fixed import name
 import { removeWidget, addWidget } from '../features/dashboardSlice';
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
@@ -15,6 +15,7 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
   const [showModalWidgetEdit, setShowModalWidgetEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [widgetDescription, setWidgetDescription] = useState('');
+  const [widget,setWidget] = useState('');
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,7 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
 
   const handleEditWidget = (widgetN) => {
     console.log(widgetN)
-    setWidgetName(widgetN)
+    setWidget(widgetN)
     setShowModalWidgetEdit(true);
   }
 
@@ -160,7 +161,7 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
       {showModalWidgetEdit && (
         <Editwidgetmodal
           category={selectedCategory}
-          widget = {widgetName}
+          widget = {widget}
           onClose={() => setShowModalWidgetEdit(false)}
         />
       )}
