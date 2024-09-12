@@ -22,7 +22,10 @@ const Widget = ({ widget, onRemove, onEdit }) => {
         </button>
       </div>
       <h3 className="text-lg font-semibold mb-2">{widget.name}</h3>
-      <p className="text-gray-700">{widget.text}</p>
+      <div className="flex items-start">
+        <img src={widget.image} alt={widget.name} className="w-fit h-32 object-cover rounded-lg" />
+        <p className="text-gray-700 px-4">{widget.text}</p>
+      </div>
     </div>
   );
 };

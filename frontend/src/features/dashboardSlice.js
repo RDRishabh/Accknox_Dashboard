@@ -15,20 +15,6 @@ const loadInitialState = () => {
           // { id: 2, name: 'Widget 2', text: 'Random text for Widget 2' },
         ],
       },
-      {
-        name: 'CWPP Dashboard',
-        widgets: [
-          // { id: 3, name: 'Widget 3', text: 'Random text for Widget 3' },
-          // { id: 4, name: 'Widget 4', text: 'Random text for Widget 4' },
-        ],
-      },
-      {
-        name: 'Registry Scan',
-        widgets: [
-          // { id: 5, name: 'Widget 5', text: 'Random text for Widget 5' },
-          // { id: 6, name: 'Widget 6', text: 'Random text for Widget 6' },
-        ],
-      }
     ],
   };
 };
@@ -52,21 +38,25 @@ export const dashboardSlice = createSlice({
         );
     },
     addWidget: (state, action) => {
-      const { categoryName, widgetName, widgetText } = action.payload;
-      console.log(categoryName,widgetName,widgetText);
+      const { categoryName, widgetName, widgetText, widgetImage } = action.payload; // Added widgetImage
+      console.log(widgetImage);
+
       const category = state.categories.find(
         (cat) => cat.name === categoryName
       );
+      
       if (category) {
         const newWidget = {
           id: new Date().getTime(),
           name: widgetName,
           text: widgetText,
+          image: widgetImage ? widgetImage : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/800px-Image_not_available.png", // Added image property to store the widget image
         };
+        
         category.widgets.push(newWidget);
         saveStateToLocalStorage(state);
       }
-    },
+    },    
     updateWidget: (state,action) => {
       // Add code to update widget
       const { categoryName, widgetId, newName, newText } = action.payload;

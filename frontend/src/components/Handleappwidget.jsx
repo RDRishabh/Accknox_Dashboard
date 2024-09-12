@@ -16,6 +16,7 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [widgetDescription, setWidgetDescription] = useState('');
   const [widget,setWidget] = useState('');
+  const [widgetImage, setWidgetImage] = useState('');
 
   const dispatch = useDispatch();
 
@@ -50,9 +51,10 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
 
   const handleAddWidget = () => {
     if (widgetName.trim() && widgetDescription.trim()) {
-      dispatch(addWidget({ categoryName: selectedCategory, widgetName, widgetText: widgetDescription }));
+      dispatch(addWidget({ categoryName: selectedCategory, widgetName, widgetText: widgetDescription, widgetImage }));
       setWidgetName('');
       setWidgetDescription('');
+      setWidgetImage('');
     }
     // onClose(); 
   };
@@ -138,6 +140,16 @@ const HandleAppWidget = ({ category, categories, onClose }) => {
           onChange={(e) => setWidgetDescription(e.target.value)}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-200 transition-all duration-300"
           placeholder="Enter widget description"
+        />
+      </div>
+      <div className="mb-6">
+        <label className="block text-lg text-gray-600 font-medium mb-2">Widget Image:</label>
+        <input
+          type="text"
+          value={widgetImage}
+          onChange={(e) => setWidgetImage(e.target.value)}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-200 transition-all duration-300"
+          placeholder="Enter widget Image URL"
         />
       </div>
 
