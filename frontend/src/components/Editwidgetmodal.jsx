@@ -5,6 +5,7 @@ import { updateWidget } from '../features/dashboardSlice'; // Import updateWidge
 const Editwidgetmodal = ({ category, widget, onClose }) => {
   const [widgetName, setWidgetName] = useState(widget.name);
   const [widgetText, setWidgetText] = useState(widget.text);
+  const [widgetImageURL, setWidgetImageURL] = useState(widget.image);
   const dispatch = useDispatch();
 
   const handleUpdateWidget = () => {
@@ -12,7 +13,8 @@ const Editwidgetmodal = ({ category, widget, onClose }) => {
       categoryName: category, 
       widgetId: widget.id, 
       newName: widgetName, 
-      newText: widgetText 
+      newText: widgetText,
+      newImage: widgetImageURL,
     }));
     onClose();
   };
@@ -32,6 +34,13 @@ const Editwidgetmodal = ({ category, widget, onClose }) => {
           value={widgetText}
           onChange={(e) => setWidgetText(e.target.value)}
           placeholder="Widget Description"
+          className="w-full px-3 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="text"
+          value={widgetImageURL}
+          onChange={(e) => setWidgetImageURL(e.target.value)}
+          placeholder={"Widget Image URL"}
           className="w-full px-3 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <div className="flex justify-end">

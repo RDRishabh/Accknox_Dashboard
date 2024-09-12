@@ -59,7 +59,7 @@ export const dashboardSlice = createSlice({
     },    
     updateWidget: (state,action) => {
       // Add code to update widget
-      const { categoryName, widgetId, newName, newText } = action.payload;
+      const { categoryName, widgetId, newName, newText, newImage } = action.payload;
       const category = state.categories.find(
         (cat) => cat.name === categoryName
       );
@@ -68,6 +68,7 @@ export const dashboardSlice = createSlice({
         if (widget) {
           widget.name = newName;
           widget.text = newText;
+          widget.image = newImage;
           saveStateToLocalStorage(state);
         }
       }
