@@ -26,6 +26,13 @@ Build the code
   npm run build
 ```
 
+Start the server
+
+```bash
+  npm run dev
+```
+
+
 The project is a dynamic **React** dashboard application with state management handled using **Redux**. The dashboard allows users to manage categories and widgets within those categories, supporting features such as:
 
 - **Widget Management**: Users can add, edit, and delete widgets in different categories. The widget panel allows for widget customization with details such as name, description, and image.
@@ -45,8 +52,3 @@ The project is a dynamic **React** dashboard application with state management h
 The project uses **Tailwind CSS** for styling, ensuring a minimalistic and responsive design, and **React Icons** for intuitive user interaction.
 
 
-Start the server
-
-```bash
-  npm run dev
-```
